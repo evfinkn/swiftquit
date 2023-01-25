@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="20037"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -706,24 +706,202 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="Swift_Quit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="459" height="309"/>
+                        <rect key="frame" x="0.0" y="0.0" width="459" height="540"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="24" horizontalPageScroll="10" verticalLineScroll="24" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gQS-hZ-61c">
-                                <rect key="frame" x="30" y="28" width="364" height="131"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <clipView key="contentView" focusRingType="none" id="I7C-cG-mpl">
-                                    <rect key="frame" x="1" y="1" width="362" height="129"/>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Yfr-1e-je9">
+                                <rect key="frame" x="382" y="464" width="48" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="MOX-mR-aAK"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="Icon256" id="1B3-ha-wxW"/>
+                            </imageView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jpv-fI-EXo">
+                                <rect key="frame" x="390" y="445" width="32" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="28" id="KBk-VE-uqF"/>
+                                </constraints>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="v 1.2" id="6SP-te-joH">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <switch horizontalHuggingPriority="750" verticalHuggingPriority="750" controlSize="small" baseWritingDirection="leftToRight" alignment="left" translatesAutoresizingMaskIntoConstraints="NO" id="U8g-zg-HX3">
+                                <rect key="frame" x="28" y="460" width="36" height="21"/>
+                                <connections>
+                                    <action selector="automaticallyQuitApps:" target="XfG-lQ-9wD" id="fsy-4g-TjM"/>
+                                </connections>
+                            </switch>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3o1-cB-b0a">
+                                <rect key="frame" x="71" y="463" width="150" height="16"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Automatically Quit Apps" id="J1m-o9-8N2">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <switch horizontalHuggingPriority="750" verticalHuggingPriority="750" controlSize="small" baseWritingDirection="leftToRight" alignment="left" translatesAutoresizingMaskIntoConstraints="NO" id="sxz-6t-zUP">
+                                <rect key="frame" x="28" y="492" width="36" height="21"/>
+                                <connections>
+                                    <action selector="launchAtLoginToggle:" target="XfG-lQ-9wD" id="gni-dm-Awn"/>
+                                    <binding destination="NFW-oP-p1K" name="value" keyPath="values.launchAtLogin.isEnabled" id="H53-I2-HiE"/>
+                                </connections>
+                            </switch>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ICr-lq-5Ag">
+                                <rect key="frame" x="71" y="495" width="183" height="16"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Start Swift Quit Automatically" id="F0t-LT-dKo">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1GU-U0-SZL">
+                                <rect key="frame" x="28" y="432" width="106" height="16"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" enabled="NO" title="Quit Which Apps" id="wK1-Zj-h5x">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="systemGrayColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RlV-PR-eIo" userLabel="Quit Which Apps">
+                                <rect key="frame" x="156" y="424" width="193" height="25"/>
+                                <popUpButtonCell key="cell" type="push" title="All Except Excluded Apps" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" enabled="NO" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="3Og-us-iPj" id="esn-qs-dVq">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="eZh-LD-ssH">
+                                        <items>
+                                            <menuItem title="All Except Excluded Apps" state="on" id="3Og-us-iPj"/>
+                                            <menuItem title="All Apps" id="bZl-gY-JzO"/>
+                                            <menuItem title="Only Included Apps" id="wiR-uB-BPK">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                                <connections>
+                                    <action selector="changeQuitWhich:" target="XfG-lQ-9wD" id="q0V-dC-Gre"/>
+                                </connections>
+                            </popUpButton>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qN4-5U-GX0">
+                                <rect key="frame" x="28" y="397" width="103" height="16"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" enabled="NO" title="Quit Apps When" id="xml-V0-jKx">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="systemGrayColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CR6-on-I7J">
+                                <rect key="frame" x="156" y="390" width="193" height="25"/>
+                                <popUpButtonCell key="cell" type="push" title="Last Window Is Closed" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" enabled="NO" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="7DS-VM-2na" id="FeE-zL-Cbs">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="Orb-TU-Aub">
+                                        <items>
+                                            <menuItem title="Last Window Is Closed" state="on" id="7DS-VM-2na"/>
+                                            <menuItem title="Any Window Is Closed" id="ayH-Ap-OlI"/>
+                                        </items>
+                                    </menu>
+                                    <connections>
+                                        <action selector="changeQuitOn:" target="XfG-lQ-9wD" id="x3D-IS-ISf"/>
+                                    </connections>
+                                </popUpButtonCell>
+                            </popUpButton>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NHe-Oz-zE2">
+                                <rect key="frame" x="27" y="359" width="91" height="16"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Included Apps" id="dtE-6j-Xdq">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <scrollView autohidesScrollers="YES" horizontalLineScroll="24" horizontalPageScroll="10" verticalLineScroll="24" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JYx-zb-rTG">
+                                <rect key="frame" x="29" y="212" width="365" height="139"/>
+                                <clipView key="contentView" focusRingType="none" id="e9O-F1-zZP">
+                                    <rect key="frame" x="1" y="1" width="363" height="137"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="24" id="2RC-Ux-Uzx">
-                                            <rect key="frame" x="0.0" y="0.0" width="362" height="123"/>
+                                        <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="24" id="uNn-DJ-Pq6">
+                                            <rect key="frame" x="0.0" y="0.0" width="363" height="131"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="17" height="0.0"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn identifier="path" width="350" minWidth="40" maxWidth="1000" id="TqA-4m-OLu">
+                                                <tableColumn identifier="path" width="351" minWidth="40" maxWidth="1000" id="CGb-ho-A4W">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                    </tableHeaderCell>
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingHead" selectable="YES" allowsUndo="NO" alignment="left" title="Text Cell" id="cEU-AR-uO7">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                </tableColumn>
+                                            </tableColumns>
+                                        </tableView>
+                                    </subviews>
+                                </clipView>
+                                <edgeInsets key="contentInsets" left="0.0" right="0.0" top="7" bottom="0.0"/>
+                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="8cr-ec-Z71">
+                                    <rect key="frame" x="1" y="122" width="362" height="16"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="6dI-bL-Lvb">
+                                    <rect key="frame" x="224" y="17" width="15" height="102"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iQl-iC-XRX" userLabel="Add Included App Button Outlet">
+                                <rect key="frame" x="413" y="328" width="16" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="k3Q-zu-JvD"/>
+                                </constraints>
+                                <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="3ae-ri-vJM">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="addIncludedApp:" target="XfG-lQ-9wD" id="tct-7X-JpX"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="c1w-2B-A6Y">
+                                <rect key="frame" x="413" y="298" width="16" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="rDo-4d-5K2"/>
+                                </constraints>
+                                <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSMenuMixedStateTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Zzm-K6-aQH">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="removeIncludedApp:" target="XfG-lQ-9wD" id="pOY-cY-PSn"/>
+                                </connections>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fAT-jx-ByR">
+                                <rect key="frame" x="28" y="174" width="94" height="16"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Excluded Apps" id="7W4-X9-qxd">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <scrollView autohidesScrollers="YES" horizontalLineScroll="24" horizontalPageScroll="10" verticalLineScroll="24" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gQS-hZ-61c">
+                                <rect key="frame" x="30" y="20" width="365" height="146"/>
+                                <clipView key="contentView" focusRingType="none" id="I7C-cG-mpl">
+                                    <rect key="frame" x="1" y="1" width="363" height="144"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="24" id="2RC-Ux-Uzx">
+                                            <rect key="frame" x="0.0" y="0.0" width="363" height="138"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <size key="intercellSpacing" width="17" height="0.0"/>
+                                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                                            <tableColumns>
+                                                <tableColumn identifier="path" width="351" minWidth="40" maxWidth="1000" id="TqA-4m-OLu">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -741,7 +919,7 @@
                                 </clipView>
                                 <edgeInsets key="contentInsets" left="0.0" right="0.0" top="7" bottom="0.0"/>
                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="B9p-2E-Zzp">
-                                    <rect key="frame" x="1" y="114" width="362" height="16"/>
+                                    <rect key="frame" x="1" y="129" width="362" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="PrB-Ix-clx">
@@ -749,9 +927,11 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <button identifier="addWhitelistAppBtn" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JJN-0m-2PI">
-                                <rect key="frame" x="407" y="136" width="23" height="24"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JJN-0m-2PI" userLabel="Add Excluded App Button Outlet">
+                                <rect key="frame" x="414" y="143" width="16" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="lAx-LC-JlK"/>
+                                </constraints>
                                 <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8oq-Ei-7O1">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -760,9 +940,11 @@
                                     <action selector="addExcludedApp:" target="XfG-lQ-9wD" id="jqZ-Wj-afe"/>
                                 </connections>
                             </button>
-                            <button identifier="removeWhitelistAppBtn" hidden="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iSS-4h-sXR">
-                                <rect key="frame" x="407" y="106" width="23" height="24"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <button hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iSS-4h-sXR">
+                                <rect key="frame" x="414" y="113" width="16" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="Dom-ip-EEn"/>
+                                </constraints>
                                 <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSMenuMixedStateTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="SKa-Oq-wFQ">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -771,108 +953,74 @@
                                     <action selector="removeExcludedApp:" target="XfG-lQ-9wD" id="srF-Za-zJv"/>
                                 </connections>
                             </button>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fAT-jx-ByR">
-                                <rect key="frame" x="28" y="167" width="94" height="16"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Excluded Apps" id="7W4-X9-qxd">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <switch horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" controlSize="small" baseWritingDirection="leftToRight" alignment="left" translatesAutoresizingMaskIntoConstraints="NO" id="U8g-zg-HX3">
-                                <rect key="frame" x="28" y="229" width="36" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <connections>
-                                    <action selector="automaticallyQuitApps:" target="XfG-lQ-9wD" id="fsy-4g-TjM"/>
-                                </connections>
-                            </switch>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3o1-cB-b0a">
-                                <rect key="frame" x="71" y="232" width="150" height="16"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Automatically Quit Apps" id="J1m-o9-8N2">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qN4-5U-GX0">
-                                <rect key="frame" x="28" y="199" width="103" height="16"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" enabled="NO" title="Quit Apps When" id="xml-V0-jKx">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="systemGrayColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CR6-on-I7J">
-                                <rect key="frame" x="136" y="193" width="177" height="25"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <popUpButtonCell key="cell" type="push" title="Last Window Is Closed" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" enabled="NO" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="7DS-VM-2na" id="FeE-zL-Cbs">
-                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="menu"/>
-                                    <menu key="menu" id="Orb-TU-Aub">
-                                        <items>
-                                            <menuItem title="Last Window Is Closed" state="on" id="7DS-VM-2na"/>
-                                            <menuItem title="Any Window Is Closed" id="ayH-Ap-OlI"/>
-                                        </items>
-                                    </menu>
-                                </popUpButtonCell>
-                                <connections>
-                                    <action selector="changeQuitOn:" target="XfG-lQ-9wD" id="D34-O1-9fY"/>
-                                </connections>
-                            </popUpButton>
-                            <switch horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" controlSize="small" baseWritingDirection="leftToRight" alignment="left" translatesAutoresizingMaskIntoConstraints="NO" id="sxz-6t-zUP">
-                                <rect key="frame" x="28" y="261" width="36" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <connections>
-                                    <action selector="launchAtLoginToggle:" target="XfG-lQ-9wD" id="gni-dm-Awn"/>
-                                    <binding destination="NFW-oP-p1K" name="value" keyPath="values.launchAtLogin.isEnabled" id="H53-I2-HiE"/>
-                                </connections>
-                            </switch>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ICr-lq-5Ag">
-                                <rect key="frame" x="71" y="264" width="183" height="16"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Start Swift Quit Automatically" id="F0t-LT-dKo">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yfr-1e-je9">
-                                <rect key="frame" x="382" y="233" width="48" height="48"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="Icon256" id="1B3-ha-wxW"/>
-                            </imageView>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jpv-fI-EXo">
-                                <rect key="frame" x="390" y="214" width="32" height="16"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="v 1.2" id="6SP-te-joH">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="gQS-hZ-61c" firstAttribute="top" secondItem="fAT-jx-ByR" secondAttribute="bottom" constant="8" id="25J-dN-1II"/>
+                            <constraint firstItem="CR6-on-I7J" firstAttribute="top" secondItem="RlV-PR-eIo" secondAttribute="bottom" constant="14" id="3Uq-aH-3Ka"/>
+                            <constraint firstItem="NHe-Oz-zE2" firstAttribute="leading" secondItem="JYx-zb-rTG" secondAttribute="leading" id="3md-FC-OJ1"/>
+                            <constraint firstItem="RlV-PR-eIo" firstAttribute="trailing" secondItem="CR6-on-I7J" secondAttribute="trailing" id="3qT-Vs-1M3"/>
+                            <constraint firstItem="U8g-zg-HX3" firstAttribute="leading" secondItem="1GU-U0-SZL" secondAttribute="leading" id="5KP-sz-h0c"/>
+                            <constraint firstAttribute="trailing" secondItem="Yfr-1e-je9" secondAttribute="trailing" constant="29" id="5VZ-Rq-9K1"/>
+                            <constraint firstItem="fAT-jx-ByR" firstAttribute="top" secondItem="JYx-zb-rTG" secondAttribute="bottom" constant="22" id="7DX-ck-tOt"/>
+                            <constraint firstItem="sxz-6t-zUP" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="30" id="7ec-3p-MNH"/>
+                            <constraint firstItem="Yfr-1e-je9" firstAttribute="centerX" secondItem="jpv-fI-EXo" secondAttribute="centerX" id="958-Yx-mNZ"/>
+                            <constraint firstItem="NHe-Oz-zE2" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="29" id="Ccw-hz-vou"/>
+                            <constraint firstItem="gQS-hZ-61c" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="374" id="DcX-Su-Ryo"/>
+                            <constraint firstItem="1GU-U0-SZL" firstAttribute="leading" secondItem="qN4-5U-GX0" secondAttribute="leading" id="IJk-aU-9wS"/>
+                            <constraint firstItem="iQl-iC-XRX" firstAttribute="leading" secondItem="JYx-zb-rTG" secondAttribute="trailing" constant="19" id="JJd-hC-IBS"/>
+                            <constraint firstItem="U8g-zg-HX3" firstAttribute="centerY" secondItem="3o1-cB-b0a" secondAttribute="centerY" id="JON-SR-aUL"/>
+                            <constraint firstItem="RlV-PR-eIo" firstAttribute="leading" secondItem="1GU-U0-SZL" secondAttribute="trailing" constant="27" id="NjL-71-qre"/>
+                            <constraint firstItem="sxz-6t-zUP" firstAttribute="leading" secondItem="U8g-zg-HX3" secondAttribute="leading" id="NzW-Ot-KWo"/>
+                            <constraint firstAttribute="trailing" secondItem="iQl-iC-XRX" secondAttribute="trailing" constant="30" id="OUD-VP-fDS"/>
+                            <constraint firstItem="qN4-5U-GX0" firstAttribute="baseline" secondItem="CR6-on-I7J" secondAttribute="baseline" id="Of4-8R-sOb"/>
+                            <constraint firstItem="1GU-U0-SZL" firstAttribute="top" secondItem="U8g-zg-HX3" secondAttribute="bottom" constant="14" id="OwD-TL-iNf"/>
+                            <constraint firstItem="U8g-zg-HX3" firstAttribute="top" secondItem="sxz-6t-zUP" secondAttribute="bottom" constant="14" id="RKL-Qx-zOZ"/>
+                            <constraint firstItem="fAT-jx-ByR" firstAttribute="leading" secondItem="qN4-5U-GX0" secondAttribute="leading" id="RcT-qF-Tjx"/>
+                            <constraint firstItem="iQl-iC-XRX" firstAttribute="leading" secondItem="c1w-2B-A6Y" secondAttribute="leading" id="Rd5-xn-IOx"/>
+                            <constraint firstItem="JJN-0m-2PI" firstAttribute="leading" secondItem="iSS-4h-sXR" secondAttribute="leading" id="S32-TJ-Qo2"/>
+                            <constraint firstAttribute="bottom" secondItem="gQS-hZ-61c" secondAttribute="bottom" constant="20" symbolic="YES" id="S3h-Xa-YHa"/>
+                            <constraint firstItem="iSS-4h-sXR" firstAttribute="top" secondItem="JJN-0m-2PI" secondAttribute="bottom" constant="8" symbolic="YES" id="Tuj-0A-sAl"/>
+                            <constraint firstItem="1GU-U0-SZL" firstAttribute="top" secondItem="RlV-PR-eIo" secondAttribute="top" id="Ykb-Pk-b4X"/>
+                            <constraint firstItem="JJN-0m-2PI" firstAttribute="leading" secondItem="gQS-hZ-61c" secondAttribute="trailing" constant="19" id="Z9P-NQ-F92"/>
+                            <constraint firstItem="c1w-2B-A6Y" firstAttribute="top" secondItem="iQl-iC-XRX" secondAttribute="bottom" constant="8" symbolic="YES" id="a9T-SN-10k"/>
+                            <constraint firstItem="RlV-PR-eIo" firstAttribute="leading" secondItem="CR6-on-I7J" secondAttribute="leading" id="cqd-QW-1gd"/>
+                            <constraint firstAttribute="trailing" secondItem="jpv-fI-EXo" secondAttribute="trailing" constant="39" id="ePU-xa-FSr"/>
+                            <constraint firstItem="NHe-Oz-zE2" firstAttribute="top" secondItem="qN4-5U-GX0" secondAttribute="bottom" constant="22" id="eoc-ic-f1x"/>
+                            <constraint firstItem="ICr-lq-5Ag" firstAttribute="leading" secondItem="3o1-cB-b0a" secondAttribute="leading" id="gMX-hc-rLt"/>
+                            <constraint firstItem="jpv-fI-EXo" firstAttribute="top" secondItem="Yfr-1e-je9" secondAttribute="bottom" constant="3" id="iWd-aP-vkR"/>
+                            <constraint firstItem="sxz-6t-zUP" firstAttribute="centerY" secondItem="ICr-lq-5Ag" secondAttribute="centerY" id="kEA-Sr-pwe"/>
+                            <constraint firstItem="fAT-jx-ByR" firstAttribute="leading" secondItem="gQS-hZ-61c" secondAttribute="leading" id="mMl-Uw-K8u"/>
+                            <constraint firstItem="JYx-zb-rTG" firstAttribute="top" secondItem="iQl-iC-XRX" secondAttribute="top" id="ooA-hS-msv"/>
+                            <constraint firstItem="gQS-hZ-61c" firstAttribute="top" secondItem="JJN-0m-2PI" secondAttribute="top" id="rc5-e1-UzX"/>
+                            <constraint firstItem="JYx-zb-rTG" firstAttribute="top" secondItem="NHe-Oz-zE2" secondAttribute="bottom" constant="8" id="sLE-IP-Czz"/>
+                            <constraint firstItem="ICr-lq-5Ag" firstAttribute="leading" secondItem="sxz-6t-zUP" secondAttribute="trailing" constant="11" id="sdq-5Q-3ya"/>
+                            <constraint firstItem="JJN-0m-2PI" firstAttribute="trailing" secondItem="Yfr-1e-je9" secondAttribute="trailing" id="skS-CP-5Jg"/>
+                            <constraint firstItem="sxz-6t-zUP" firstAttribute="top" secondItem="Yfr-1e-je9" secondAttribute="top" id="uo1-mC-NDc"/>
+                            <constraint firstItem="sxz-6t-zUP" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="28" id="yNe-3p-bV9"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="excludedAppsTableView" destination="2RC-Ux-Uzx" id="bJz-iv-Tv2"/>
+                        <outlet property="includedAppsTableView" destination="uNn-DJ-Pq6" id="sW5-hX-hTz"/>
                         <outlet property="launchAtLoginSwitch" destination="sxz-6t-zUP" id="J4E-Qp-JFm"/>
                         <outlet property="quitAppsAutomaticallySwitchOutlet" destination="U8g-zg-HX3" id="d8k-Rd-nrI"/>
                         <outlet property="quitAppsWhenLabelOutlet" destination="qN4-5U-GX0" id="T48-fr-XSc"/>
                         <outlet property="quitAppsWhenPopupOutlet" destination="CR6-on-I7J" id="Yhs-zg-GxM"/>
-                        <outlet property="removeExcludedAppButtonOutlet" destination="iSS-4h-sXR" id="CeX-us-HM7"/>
+                        <outlet property="quitWhichAppsLabelOutlet" destination="1GU-U0-SZL" id="L32-q7-WQh"/>
+                        <outlet property="quitWhichAppsPopupOutlet" destination="RlV-PR-eIo" id="hSA-E1-lvv"/>
+                        <outlet property="removeExcludedAppButtonOutlet" destination="iSS-4h-sXR" id="CoY-Vl-3eE"/>
+                        <outlet property="removeIncludedAppButtonOutlet" destination="c1w-2B-A6Y" id="4aI-MW-Iaa"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController representsSharedInstance="YES" id="NFW-oP-p1K"/>
             </objects>
-            <point key="canvasLocation" x="64.5" y="674.5"/>
+            <point key="canvasLocation" x="55.5" y="839"/>
         </scene>
     </scenes>
     <resources>
         <image name="Icon256" width="256" height="256"/>
-        <image name="NSAddTemplate" width="14" height="13"/>
-        <image name="NSMenuMixedStateTemplate" width="14" height="4"/>
+        <image name="NSAddTemplate" width="18" height="17"/>
+        <image name="NSMenuMixedStateTemplate" width="18" height="5"/>
     </resources>
 </document>

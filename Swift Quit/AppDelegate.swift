@@ -13,6 +13,7 @@ import PromiseKit
 
 var userDefaults = UserDefaults.standard
 var swiftQuitSettings = SwiftQuit.getSettings()
+var swiftQuitIncludedApps = SwiftQuit.getIncludedApps()
 var swiftQuitExcludedApps = SwiftQuit.getExcludedApps()
 let storyboard = NSStoryboard(name: "Main", bundle: nil)
 var settingsWindow = (storyboard.instantiateController(withIdentifier: "settings") as! NSWindowController)
@@ -24,59 +25,44 @@ var lastLaunchedAppPid : Int32 = 0;
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
-    
-
-
-    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        
-        
-        
+    
         guard AXSwift.checkIsProcessTrusted(prompt: true) else {
-                print("Not trusted as an AX process; please authorize and re-launch")
-                NSApp.terminate(self)
-                return
-            }
-         
+            print("Not trusted as an AX process; please authorize and re-launch")
+            NSApp.terminate(self)
+            return
+        }
         
         Swindler.initialize().done { state in
-                swindler = state
-                SwiftQuit.activateAutomaticAppClosing()
-            }.catch { error in
-                print("Fatal error: failed to initialize Swindler: \(error)")
-                NSApp.terminate(self)
-            }
-        
+            swindler = state
+            SwiftQuit.activateAutomaticAppClosing()
+        }.catch { error in
+            print("Fatal error: failed to initialize Swindler: \(error)")
+            NSApp.terminate(self)
+        }
         
         loadMenu()
-        
         
         if(swiftQuitSettings["launchAtLogin"] != "true"){
             openSettings();
         }
-        
-        
-        
-
     }
     
- 
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
-
+    
     func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {
         return true
     }
-
     
     @objc func loadMenu() {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-                           if let button = statusItem.button {
-                               button.image = #imageLiteral(resourceName: "MenuIcon")
-                               button.image?.size = NSSize(width: 18.0, height: 18.0)
-                               button.image?.isTemplate = true
-                    }
+        if let button = statusItem.button {
+            button.image = #imageLiteral(resourceName: "MenuIcon")
+            button.image?.size = NSSize(width: 18.0, height: 18.0)
+            button.image?.isTemplate = true
+        }
         statusItem.isVisible = true
         let closeAppsMenuItem = NSMenuItem(title: "Close Windowless Apps", action:  #selector(closeApps) , keyEquivalent: "c")
         menu.addItem(closeAppsMenuItem)
@@ -96,8 +82,5 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @objc func closeApps(){
         SwiftQuit.closeWindowlessApps()
     }
-
-
-
 }
 

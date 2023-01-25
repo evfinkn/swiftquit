@@ -26,6 +26,14 @@ class SwiftQuit {
         userDefaults.set(swiftQuitSettings, forKey: "SwiftQuitSettings")
     }
     
+    @objc class func getIncludedApps() -> [String] {
+        return userDefaults.object(forKey: "SwiftQuitIncludedApps") as? [String] ?? []
+    }
+    
+    @objc class func updateIncludedApps(){
+        userDefaults.set(swiftQuitIncludedApps, forKey: "SwiftQuitIncludedApps")
+    }
+    
     @objc class func getExcludedApps() -> [String] {
         return userDefaults.object(forKey: "SwiftQuitExcludedApps") as? [String] ?? []
     }
@@ -52,6 +60,18 @@ class SwiftQuit {
         updateSettings()
     }
     
+    @objc class func enableQuitAllApps(){
+        swiftQuitSettings["quitWhich"] = "allApps"
+        updateSettings()
+    }
+    @objc class func enableQuitAllExceptExcludedApps(){
+        swiftQuitSettings["quitWhich"] = "allExceptExcludedApps"
+        updateSettings()
+    }
+    @objc class func enableQuitOnlyIncludedApps(){
+        swiftQuitSettings["quitWhich"] = "onlyIncludedApps"
+        updateSettings()
+    }
     
     @objc class func enableQuitOnLastWindow(){
         swiftQuitSettings["quitWhen"] = "lastWindowClosed"
@@ -81,34 +101,36 @@ class SwiftQuit {
             let applicationPID = app.processIdentifier
             
             if(myAppPid != applicationPID){
-            
-            var applicationName = app.bundleURL!.absoluteString
-            applicationName.remove(at: applicationName.index(before: applicationName.endIndex))
-            applicationName = applicationName.replacingOccurrences(of: "file://", with: "")
-            applicationName = applicationName.replacingOccurrences(of: "%20", with: " ")
-            
-
-            if(!swiftQuitExcludedApps.contains(applicationName)){
                 
-                var closeApp = true as Bool
+                var applicationName = app.bundleURL!.absoluteString
+                applicationName.remove(at: applicationName.index(before: applicationName.endIndex))
+                applicationName = applicationName.replacingOccurrences(of: "file://", with: "")
+                applicationName = applicationName.replacingOccurrences(of: "%20", with: " ")
                 
-                if let windowList = CGWindowListCopyWindowInfo(.optionOnScreenOnly, kCGNullWindowID) as? [[ String : Any]]{
+                
+                if(swiftQuitSettings["quitWhich"] == "allApps" ||
+                   (swiftQuitSettings["quitWhich"] == "allExceptExcludedApps" &&
+                    !swiftQuitExcludedApps.contains(applicationName)) ||
+                   (swiftQuitSettings["quitWhich"] == "onlyIncludedApps" &&
+                    swiftQuitIncludedApps.contains(applicationName))){
                     
-                    for window in windowList {
-                        if let windowName = window[kCGWindowOwnerName as String] as? String {
-                            if windowName == app.localizedName!{
-                                closeApp = false
+                    var closeApp = true as Bool
+                    
+                    if let windowList = CGWindowListCopyWindowInfo(.optionOnScreenOnly, kCGNullWindowID) as? [[ String : Any]]{
+                        
+                        for window in windowList {
+                            if let windowName = window[kCGWindowOwnerName as String] as? String {
+                                if windowName == app.localizedName!{
+                                    closeApp = false
+                                }
                             }
                         }
                     }
+                    
+                    if (closeApp == true){
+                        app.terminate()
+                    }
                 }
-                
-                if (closeApp == true){
-                    app.terminate()
-                }
-        
-                
-            }
             }
         }
     }
@@ -119,7 +141,7 @@ class SwiftQuit {
                 print("Application still has windows; aborting")
                 return
             }
-
+            
             let processIdentifier = event.window.application.processIdentifier
             closeApplication(pid:processIdentifier)
         }
@@ -127,67 +149,53 @@ class SwiftQuit {
     
     @objc class func closeApplication(pid:Int32){
         let myAppPid = ProcessInfo.processInfo.processIdentifier
-
+        
         let app = AppKit.NSRunningApplication.init(processIdentifier: pid)!
         var applicationName = app.bundleURL!.absoluteString
         
-            if(swiftQuitSettings["automaticQuitEnabled"] == "true"){
+        if(swiftQuitSettings["automaticQuitEnabled"] == "true"){
             
             
             
             applicationName.remove(at: applicationName.index(before: applicationName.endIndex))
             applicationName = applicationName.replacingOccurrences(of: "file://", with: "")
             applicationName = applicationName.replacingOccurrences(of: "%20", with: " ")
-
-
+            
+            
             
             if(myAppPid != pid){
-            
-            if(!swiftQuitExcludedApps.contains(applicationName)){
-
-                if(swiftQuitSettings["quitWhen"] == "anyWindowClosed"){
-                    app.terminate()
-                }
-                else{
-
-                    var openWindows = 0
-                    if let windowList = CGWindowListCopyWindowInfo(.optionOnScreenOnly, kCGNullWindowID) as? [[ String : Any]]{
+                
+                if(swiftQuitSettings["quitWhich"] == "allApps" ||
+                   (swiftQuitSettings["quitWhich"] == "allExceptExcludedApps" &&
+                    !swiftQuitExcludedApps.contains(applicationName)) ||
+                   (swiftQuitSettings["quitWhich"] == "onlyIncludedApps" &&
+                    swiftQuitIncludedApps.contains(applicationName))){
+                    
+                    if(swiftQuitSettings["quitWhen"] == "anyWindowClosed"){
+                        app.terminate()
+                    }
+                    else{
                         
-                        for window in windowList {
-                            if let windowName = window[kCGWindowOwnerName as String] as? String {
-                                //print(windowName)
-                                if windowName == app.localizedName!{
-                                    openWindows += 1
-                                    //closeApp = false
+                        var openWindows = 0
+                        if let windowList = CGWindowListCopyWindowInfo(.optionOnScreenOnly, kCGNullWindowID) as? [[ String : Any]]{
+                            
+                            for window in windowList {
+                                if let windowName = window[kCGWindowOwnerName as String] as? String {
+                                    //print(windowName)
+                                    if windowName == app.localizedName!{
+                                        openWindows += 1
+                                        //closeApp = false
+                                    }
                                 }
                             }
                         }
+                        
+                        if(openWindows == 1){
+                            app.terminate()
+                        }
                     }
-                    
-
-                    if(openWindows == 1){
-                        app.terminate()
-                    }
-                
                 }
-                
             }
-        
-
-            
-            
-            
-            
-            
-            
-            
-            
         }
-        }
-        
-        
     }
-
-    
-    
 }

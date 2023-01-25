@@ -137,17 +137,12 @@ class SwiftQuit {
     
     @objc class func activateAutomaticAppClosing(){
         swindler.on { (event: WindowDestroyedEvent) in
-            if !event.window.application.knownWindows.isEmpty {
-                print("Application still has windows; aborting")
-                return
-            }
-            
             let processIdentifier = event.window.application.processIdentifier
-            closeApplication(pid:processIdentifier)
+            closeApplication(pid:processIdentifier, eventApp:event.window.application)
         }
     }
     
-    @objc class func closeApplication(pid:Int32){
+    class func closeApplication(pid:Int32, eventApp:Swindler.Application){
         let myAppPid = ProcessInfo.processInfo.processIdentifier
         
         let app = AppKit.NSRunningApplication.init(processIdentifier: pid)!
@@ -174,24 +169,11 @@ class SwiftQuit {
                     if(swiftQuitSettings["quitWhen"] == "anyWindowClosed"){
                         app.terminate()
                     }
-                    else{
-                        
-                        var openWindows = 0
-                        if let windowList = CGWindowListCopyWindowInfo(.optionOnScreenOnly, kCGNullWindowID) as? [[ String : Any]]{
-                            
-                            for window in windowList {
-                                if let windowName = window[kCGWindowOwnerName as String] as? String {
-                                    //print(windowName)
-                                    if windowName == app.localizedName!{
-                                        openWindows += 1
-                                        //closeApp = false
-                                    }
-                                }
+                    else {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
+                            if eventApp.knownWindows.isEmpty {
+                                app.terminate()
                             }
-                        }
-                        
-                        if(openWindows == 1){
-                            app.terminate()
                         }
                     }
                 }
